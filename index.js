@@ -1,13 +1,16 @@
 const express = require('express');
-const database = require('');
-const expressConfig=require('');
+const databaseConfig = require('./config/database');
+const expressConfig = require('./config/express');
+const routesConfig = require('./config/routes');
 
 const port = 3000;
 
 async function start() {
     const app = express();
 
-    express(app);
+    expressConfig(app);
+    await databaseConfig(app);
+    routesConfig(app);
 
     app.listen(port, () => console.log(`Server is listening on port ${port}`));
 }
