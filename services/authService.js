@@ -42,6 +42,18 @@ async function login(username, password) {
     return token;
 }
 
+function createToken(user) {
+    const payload = {
+        username: user.username,
+        password: user.password,
+        _id: user._id
+    };
+
+    const token = jwt.sign(payload, secret);
+console.log('createToken '+token);
+    return token;
+}
+
 module.exports = {
     register,
     veryfyToken,
