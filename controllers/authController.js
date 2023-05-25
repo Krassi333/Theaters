@@ -9,4 +9,26 @@ router.get('/register', (req, res) => {
     })
 });
 
+router.post('/register', async (req, res) => {
+
+    try {
+        if (req.body.passwprd != req.body.repass) {
+            throw new Error('Passwords don\'t match!');
+        }
+
+        const token = await register(req.body.username, req.body.password);
+
+        res.cookie('token', token);
+        res.redirect('/');
+    } catch (err) {
+        const errors = errorParser(err);
+        res.render('register', {
+            title: "Register Page",
+            errors,
+            username: req.body.username
+        });
+    }
+
+});
+
 module.exports = router;
