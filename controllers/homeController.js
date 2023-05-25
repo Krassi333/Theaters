@@ -2,10 +2,19 @@ const router = require('express').Router();
 
 router.get('/', (req, res) => {
     const user = req.user;
-    const view = user ? 'user-home' : 'guest-home';
+    let view = '';
+console.log(user);
+    if (user) {
+        view = 'user-home';
+    } else {
+        view = 'guest-home';
+    }
+
+    console.log(view);
 
     res.render(view, {
-        title: "Home Page"
+        title: "Home Page",
+        user
     });
 });
 
