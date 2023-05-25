@@ -54,6 +54,10 @@ console.log('createToken '+token);
     return token;
 }
 
+async function veryfyToken(token) {
+    return jwt.verify(token, secret);
+}
+
 module.exports = {
     register,
     veryfyToken,
