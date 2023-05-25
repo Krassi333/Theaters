@@ -23,6 +23,25 @@ async function register(username, password) {
     return token;
 };
 
+async function login(username, password) {
+    const user = User.findOne({ username }).collation({ locale: 'en', strength: 2 });
+
+    if (!user) {
+        throw new Error('Invalid username or password!');
+    }
+   //console.log(password)
+    //console.log(user.password);
+    ;
+    const passCheck = await bcrypt.compare(password, user.password);
+
+    if (!passCheck) {
+        throw new Error('Invalid username or password!');
+    }
+
+    const token = createToken(user);
+    return token;
+}
+
 module.exports = {
     register,
     veryfyToken,
