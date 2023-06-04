@@ -24,13 +24,13 @@ async function register(username, password) {
 };
 
 async function login(username, password) {
-    const user = User.findOne({ username }).collation({ locale: 'en', strength: 2 });
-
+    const user =await  User.findOne({ username }).collation({ locale: 'en', strength: 2 });
+//console.log('user '+user);
     if (!user) {
         throw new Error('Invalid username or password!');
     }
-   //console.log(password)
-    //console.log(user.password);
+   //console.log('password '+password)
+   // console.log('user pass '+user.password);
     ;
     const passCheck = await bcrypt.compare(password, user.password);
 
@@ -50,16 +50,16 @@ function createToken(user) {
     };
 
     const token = jwt.sign(payload, secret);
-console.log('createToken '+token);
+//console.log('createToken '+token);
     return token;
 }
 
-async function veryfyToken(token) {
+ function verifyToken(token) {
     return jwt.verify(token, secret);
 }
 
 module.exports = {
     register,
-    veryfyToken,
+    verifyToken,
     login
 }
