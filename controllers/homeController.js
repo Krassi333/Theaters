@@ -1,20 +1,23 @@
+const { getAllPlays } = require('../services/playServices');
+
 const router = require('express').Router();
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     const user = req.user;
     let view = '';
-console.log(user);
+
     if (user) {
         view = 'user-home';
     } else {
         view = 'guest-home';
     }
 
-    console.log(view);
+    const plays=await getAllPlays();
 
     res.render(view, {
         title: "Home Page",
-        user
+        user,
+        plays
     });
 });
 
