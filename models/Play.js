@@ -7,14 +7,15 @@ const playSchema = new Schema({
     imageUrl: { type: String, required: true },
     inPublic: { type: Boolean, default: false },
     createdAt: { type: String, required: true },
-    users: { type: [Types.ObjectId],ref:'User', default: [] }
+    users: { type: [Types.ObjectId], ref: 'User', default: [] },
+    likes: { type: Number, default: 0 }
 });
 
-playSchema.index({title:1},{
-    locale:'en',
-    strength:2
+playSchema.index({ title: 1 }, {
+    locale: 'en',
+    strength: 2
 });
 
- const Play=model('Play',playSchema);
+const Play = model('Play', playSchema);
 
-module.exports=Play;
+module.exports = Play;
