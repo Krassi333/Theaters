@@ -8,8 +8,8 @@ const port = 3000;
 async function start() {
     const app = express();
 
-    expressConfig(app);
     await databaseConfig(app);
+    expressConfig(app);
     routesConfig(app);
 
     app.listen(port, () => console.log(`Server is listening on port ${port}`));
