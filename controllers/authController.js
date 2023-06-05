@@ -17,7 +17,7 @@ router.post('/register', async (req, res) => {
         }
 
         const token = await register(req.body.username, req.body.password);
-
+console.log('token in register '+token);
         res.cookie('token', token);
         res.redirect('/');
     } catch (err) {
